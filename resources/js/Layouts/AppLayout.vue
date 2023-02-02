@@ -53,8 +53,13 @@ const logout = () => {
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('users')" :active="route().current('users')">
+                                <NavLink :href="route('viewUsers')" :active="route().current('viewUsers')">
                                     User
+                                </NavLink>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('createUser')" :active="route().current('createUser')">
+                                    Create
                                 </NavLink>
                             </div>
                         </div>

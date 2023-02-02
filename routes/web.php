@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -39,6 +41,20 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/users', function () {
-        return Inertia::render('Users');
+
+        $users = User::all();
+        // $users = 'Siuuuu';
+        return Inertia::render('Users', compact('users'));
     })->name('users');
+});
+
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::controller(UserController::class)->group(function () {
+            Route::get('viewUsers', 'viewUsers')->name('viewUsers');
+            Route::get('createUser', 'createUser')->name('createUser');
+            Route::post('newRegister', 'newRegister')->name('newRegister');
+        });
+    });
 });
